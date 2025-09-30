@@ -1,30 +1,33 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import { log } from './logger.js';
-import { tenantMiddleware } from './auth.js';
-import type { DSL, Plan } from './types.js';
 
 const app = express();
+
+// 기본 미들웨어
 app.use(cors());
 app.use(express.json());
-app.use(tenantMiddleware);
 
-app.post('/plan', async (req, res) => {
-  const { dsl } = req.body as { dsl: DSL };
-  if (!dsl?.workflow?.length) return res.status(400).json({ error: 'Missing DSL/workflow' });
-
-  const nodes = dsl.workflow.map((w, i) => ({
-    id: `n${i+1}`,
-    type: w.action,
-    config: { hitl: !!w.hitl, guard: w.guard || [] }
-  }));
-  const edges = nodes.slice(1).map((n, i) => ({ from: nodes[i].id, to: n.id }));
-  const scopes = (dsl.tools||[]).map(t => `${t}.scope`);
-
-  const plan: Plan = { nodes, edges, requiredScopes: scopes };
-  log('Plan synthesized', plan.nodes.length, 'nodes');
-  res.json({ plan });
+// 헬스체크
+app.get('/health', (_req: Request, res: Response) => {
+  res.status(200).json({ ok: true, service: 'planner' });
 });
 
-const port = Number(process.env.PORT || 3002);
-app.listen(port, () => log(`planner listening on ${port}`));
+// (예시) 실제 라우트가 있다면 타입을 명시하여 추가하세요.
+// app.post('/v1/plan', (req: Request, res: Response) => {
+//   const payload = req.body as { goal: string };
+//   res.json({ plan: [`step 1 for ${payload.goal}`, 'step 2', 'step 3'] });
+// });
+
+// 에러 핸들러 (타입 안전)
+app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  const message = err instanceof Error ? err.message : 'Unknown error';
+  res.status(500).json({ error: message });
+});
+
+// 기동
+const PORT = Number(process.env.PORT ?? 3002);
+app.listen(PORT, () => {
+  console.log(`[planner] listening on :${PORT}`);
+});
+
+export default app;
