@@ -1,0 +1,29 @@
+기본 브랜치
+
+main
+
+항상 배포 가능한 상태 유지
+
+보호 규칙 설정: 직접 커밋 금지, PR 필수
+
+develop (선택)
+
+main 병합 전 최신 개발 코드를 모으는 브랜치
+
+작은 팀이라면 develop 없이 main으로 바로 PR 해도 괜찮음
+
+작업 브랜치 네이밍
+
+기능: feat/<설명>
+예: feat/agent-parser, feat/ui-dashboard
+
+버그: fix/<설명>
+예: fix/auth-timeout
+
+리팩토링: refactor/<설명>
+예: refactor/n8n-flow-builder
+
+문서: docs/<설명>
+예: docs/readme-update
+
+기타: chore/<설명>, test/<설명>

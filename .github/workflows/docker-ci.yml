@@ -1,0 +1,99 @@
+name: Docker CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  # ===== 기본: GHCR =====
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}              # ghcr.io/<owner>/<repo>
+  # ===== Docker Hub로 쓰려면 위 2줄 대신 아래 2줄을 사용하세요 =====
+  # REGISTRY: docker.io
+  # IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/ver1
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write     # GHCR 푸시용 (Docker Hub는 불필요)
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU (multi-arch)
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # ===== 레지스트리 로그인 =====
+      # -- GHCR (기본)
+      - name: Login to GHCR
+        if: env.REGISTRY == 'ghcr.io'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # -- Docker Hub (REGISTRY를 docker.io로 바꾼 경우 이 스텝을 사용)
+      - name: Login to Docker Hub
+        if: env.REGISTRY == 'docker.io'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # ===== 태그/라벨 자동 생성 =====
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch,pattern=main,enable=true,priority=700,value=edge
+            type=semver,pattern={{version}},priority=800
+            type=semver,pattern={{major}}.{{minor}},priority=600
+            type=semver,pattern={{major}},priority=500
+            type=sha,prefix=sha-,format=short,priority=200
+          labels: |
+            org.opencontainers.image.source=${{ github.repositoryUrl }}
+            org.opencontainers.image.revision=${{ github.sha }}
+
+      # ===== 의존성 캐시 =====
+      - name: Cache Node modules (optional)
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-
+
+      # ===== (선택) 타입체크/빌드 =====
+      - name: TypeCheck & Build
+        run: |
+          if [ -f package.json ]; then npm ci || npm i; fi
+          if [ -f tsconfig.json ]; then npx tsc -v || true; fi
+          # 실제 빌드는 컨테이너 안에서 해도 되므로 여기선 검증 위주
+
+      # ===== Docker Build & Push =====
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          # 필요 시 Dockerfile 경로 지정: dockerfile: ./Dockerfile
+          # 멀티 아키텍처가 필요하면:
+          platforms: linux/amd64,linux/arm64
+          push: ${{ github.event_name == 'push' && (startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/tags/v')) }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
