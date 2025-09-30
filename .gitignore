@@ -1,2 +1,6 @@
 ﻿node_modules
 dist
+.env
+.env.*
+'@ | Out-File .gitignore -Encoding UTF8 -Append
+'20.19.5' | Out-File .nvmrc -Encoding UTF8
