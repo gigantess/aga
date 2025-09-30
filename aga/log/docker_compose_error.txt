@@ -1,0 +1,270 @@
+PS D:\2025_working\00.abni\agent개발agent\ver1\aga> docker compose up -d
+time="2025-09-30T16:35:33+09:00" level=warning msg="D:\\2025_working\\00.abni\\agent개발agent\\ver1\\aga\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+[+] Running 21/21
+ ✔ gateway Pulled                                                                                                 35.4s
+   ✔ de3b062c0af7 Download complete                                                                                1.4s
+   ✔ a11fc495bafd Download complete                                                                               26.2s
+   ✔ 933cc8470577 Download complete                                                                                1.5s
+   ✔ 45337c09cd57 Download complete                                                                                1.0s
+   ✔ 999643392fb7 Download complete                                                                                1.4s
+   ✔ 971bb7f4fb12 Download complete                                                                                1.2s
+   ✔ 09f376ebb190 Download complete                                                                               22.9s
+ ✔ n8n Pulled                                                                                                     94.4s
+   ✔ 4f4fb700ef54 Download complete                                                                                0.8s
+   ✔ 07bd8430de4c Download complete                                                                                0.7s
+   ✔ 6a088b2daae0 Download complete                                                                               25.4s
+   ✔ 016c0e952111 Download complete                                                                                1.2s
+   ✔ 396ba7995277 Download complete                                                                               25.0s
+   ✔ fa552367207c Download complete                                                                               14.4s
+   ✔ 9824c27679d3 Download complete                                                                                6.4s
+   ✔ 67aa727603b8 Download complete                                                                                6.7s
+   ✔ 587cd2f1ec01 Download complete                                                                               41.4s
+   ✔ 8c4e030a5abe Download complete                                                                                1.3s
+   ✔ 52719e552fdf Download complete                                                                                2.1s
+   ✔ a0fa1a90ad11 Download complete                                                                                9.3s
+[+] Running 0/43s (4/5)                                                                            docker:desktop-linux
+[+] Building 3.6s (4/5)                                                                            docker:desktop-linux
+ => [manifest internal] load build definition from Dockerfile                                                      0.4s
+ - Service manifest      Building                                                                                  4.9s
+ - Service manifest      Building                                                                                  6.5s
+[+] Building 5.2s (13/35)                                                                          docker:desktop-linux
+ - Service planner       Building                                                                                  6.5s
+ => [manifest internal] load build definition from Dockerfile                                                      0.4s
+[+] Running 0/4.8s (13/35)                                                                         docker:desktop-linux
+[+] Building 13.0s (13/35)                                                                         docker:desktop-linux
+ => => transferring dockerfile: 288B                                                                               0.0s
+ - Service manifest      Building                                                                                 14.3s
+ => [planner internal] load build definition from Dockerfile                                                       0.4s
+[+] Building 13.4s (13/35)                                                                         docker:desktop-linux
+ => => transferring dockerfile: 288B                                                                               0.0s
+[+] Running 0/4ternal] load build definition from Dockerfile                                                       0.4s
+ => [planner internal] load build definition from Dockerfile                                                       0.4s
+ => => transferring dockerfile: 288B                                                                               0.0s
+ - Service manifest      Building                                                                                 15.2s
+[+] Building 14.0s (13/35)                                                                         docker:desktop-linux
+ - Service planner       Building                                                                                 15.2s
+ => => transferring dockerfile: 288B                                                                               0.0s
+ - Service manifest      Building                                                                                 16.5s
+[+] Building 15.2s (13/35)                                                                         docker:desktop-linux
+ - Service planner       Building                                                                                 16.5s
+ => [planner internal] load build definition from Dockerfile                                                       0.4s
+[+] Running 0/4.7s (14/35)                                                                         docker:desktop-linux
+[+] Building 16.9s (15/35)                                                                         docker:desktop-linux
+ - Service manifest      Building                                                                                 18.1s
+ => => transferring context: 2B                                                                                    0.0s
+ - Service planner       Building                                                                                 18.1s
+[+] Running 0/4.0s (15/35)                                                                         docker:desktop-linux
+[+] Building 17.2s (15/35)                                                                         docker:desktop-linux
+ => => transferring context: 2B                                                                                    0.0s
+ - Service manifest      Building                                                                                 18.4s
+ => [nl-dsl internal] load .dockerignore                                                                           0.4s
+[+] Running 0/4.3s (19/35)                                                                         docker:desktop-linux
+[+] Building 17.5s (19/35)                                                                         docker:desktop-linux
+ => => transferring context: 2B                                                                                    0.0s
+ - Service manifest      Building                                                                                 18.8s
+ => [manifest internal] load .dockerignore                                                                         0.4s
+[+] Building 19.3s (19/35)                                                                         docker:desktop-linux
+[+] Running 0/4ring context: 2B                                                                                    0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [manifest internal] load .dockerignore                                                                         0.4s
+ - Service manifest      Building                                                                                 20.6s
+ - Service manifest      Building                                                                                 22.0s
+ - Service planner       Building                                                                                 22.0s
+ - Service policy-guard  Building                                                                                 22.0s
+ - Service nl-dsl        Building                                                                                 22.0s
+[+] Building 22.0s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+[+] Running 0/4nternal] load build context                                                                         0.6s
+ => [manifest internal] load build context                                                                         0.6s
+ => => transferring context: 3.68kB                                                                                0.0s
+ - Service policy-guard  Building                                                                                 23.5s
+ - Service nl-dsl        Building                                                                                 23.5s
+[+] Running 0/4.4s (19/35)                                                                         docker:desktop-linux
+[+] Building 22.6s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service manifest      Building                                                                                 23.8s
+ => [manifest internal] load build context                                                                         0.6s
+ - Service manifest      Building                                                                                 24.7s
+ - Service planner       Building                                                                                 24.7s
+[+] Building 23.5s (19/35)                                                                         docker:desktop-linux
+ - Service policy-guard  Building                                                                                 24.7s
+ => [manifest internal] load build context                                                                         0.6s
+ => => transferring context: 3.68kB                                                                                0.0s
+ => [nl-dsl internal] load build context                                                                           0.7s
+[+] Building 24.1s (19/35)                                                                         docker:desktop-linux
+[+] Running 0/4ng sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service manifest      Building                                                                                 25.3s
+ => [manifest internal] load build context                                                                         0.6s
+[+] Building 24.4s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => [manifest internal] load build context                                                                         0.6s
+ => => transferring context: 3.68kB                                                                                0.0s
+ => [nl-dsl internal] load build context                                                                           0.7s
+ - Service manifest      Building                                                                                 25.9s
+[+] Building 24.7s (19/35)                                                                         docker:desktop-linux
+ - Service planner       Building                                                                                 25.9s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+[+] Running 0/4.8s (19/35)                                                                         docker:desktop-linux
+[+] Building 25.0s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service manifest      Building                                                                                 26.2s
+ => [manifest internal] load build context                                                                         0.6s
+[+] Running 0/4.4s (19/35)                                                                         docker:desktop-linux
+[+] Building 25.6s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service manifest      Building                                                                                 26.8s
+ => [manifest internal] load build context                                                                         0.6s
+[+] Running 0/4.3s (19/35)                                                                         docker:desktop-linux
+[+] Building 26.5s (19/35)                                                                         docker:desktop-linux
+ - Service manifest      Building                                                                                 27.7s
+ - Service planner       Building                                                                                 27.7s
+ - Service policy-guard  Building                                                                                 27.7s
+[+] Running 0/4.8s (19/35)                                                                         docker:desktop-linux
+[+] Building 28.0s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service manifest      Building                                                                                 29.2s
+ => [manifest internal] load build context                                                                         0.6s
+[+] Running 0/4.1s (19/35)                                                                         docker:desktop-linux
+[+] Building 28.3s (19/35)                                                                         docker:desktop-linux
+ - Service manifest      Building                                                                                 29.5s
+ - Service planner       Building                                                                                 29.5s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+[+] Building 28.6s (19/35)                                                                         docker:desktop-linux
+[+] Running 0/4ng sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service manifest      Building                                                                                 29.8s
+ - Service planner       Building                                                                                 29.8s
+ - Service planner       Building                                                                                 30.1s
+ - Service policy-guard  Building                                                                                 30.1s
+[+] Building 28.9s (19/35)                                                                         docker:desktop-linux
+[+] Building 29.2s (19/35)                                                                         docker:desktop-linux
+[+] Running 0/4ng sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => [manifest internal] load build context                                                                         0.6s
+ - Service manifest      Building                                                                                 30.4s
+[+] Building 29.8s (19/35)                                                                         docker:desktop-linux
+[+] Running 0/4ng sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => [manifest internal] load build context                                                                         0.6s
+ => => transferring context: 3.68kB                                                                                0.0s
+[+] Running 0/4.9s (19/35)                                                                         docker:desktop-linux
+[+] Building 30.1s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service manifest      Building                                                                                 31.3s
+ - Service planner       Building                                                                                 31.3s
+[+] Running 0/4.2s (19/35)                                                                         docker:desktop-linux
+ - Service manifest      Building                                                                                 31.6s
+ - Service planner       Building                                                                                 31.6s
+[+] Building 30.4s (19/35)                                                                         docker:desktop-linux
+ - Service policy-guard  Building                                                                                 31.6s
+[+] Building 31.3s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+[+] Running 0/4nternal] load build context                                                                         0.6s
+ => [manifest internal] load build context                                                                         0.6s
+ => => transferring context: 3.68kB                                                                                0.0s
+ => [manifest internal] load build context                                                                         0.6s
+ => => transferring context: 3.68kB                                                                                0.0s
+ => [nl-dsl internal] load build context                                                                           0.7s
+[+] Building 31.9s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+[+] Running 0/4nternal] load build context                                                                         0.6s
+ => [manifest internal] load build context                                                                         0.6s
+ => => transferring context: 3.68kB                                                                                0.0s
+[+] Building 32.5s (19/35)                                                                         docker:desktop-linux
+[+] Running 0/4ng sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service manifest      Building                                                                                 33.7s
+ - Service planner       Building                                                                                 33.7s
+[+] Building 32.8s (19/35)                                                                         docker:desktop-linux
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+[+] Running 0/4nternal] load build context                                                                         0.6s
+ => [manifest internal] load build context                                                                         0.6s
+ => => transferring context: 3.68kB                                                                                0.0s
+ => => transferring context: 3.28kB                                                                                0.0s
+ => [policy-guard 1/7] FROM docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f  11.2s
+[+] Running 0/4rd 1/7] FROM docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f  11.2s
+ => => resolve docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f4eb47d5e2a08e1  0.1s
+[+] Building 36.2s (31/35)                                                                         docker:desktop-linux
+[+] Running 0/4ng sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service manifest      Building                                                                                 37.4s
+ => [manifest internal] load build context                                                                         0.6s
+[+] Running 0/4.3s (31/35)                                                                         docker:desktop-linux
+[+] Building 36.5s (31/35)                                                                         docker:desktop-linux
+ - Service manifest      Building                                                                                 37.7s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ - Service planner       Building                                                                                 37.7s
+ - Service policy-guard  Building                                                                                 43.7s
+ - Service nl-dsl        Building                                                                                 43.7s
+ => [nl-dsl internal] load build definition from Dockerfile                                                        0.3s
+[+] Running 0/4nternal] load build definition from Dockerfile                                                      0.4s
+ => => transferring dockerfile: 288B                                                                               0.0s
+ - Service manifest      Building                                                                                 46.6s
+ => [planner internal] load build definition from Dockerfile                                                       0.4s
+ - Service planner       Building                                                                                 46.6s
+ => => transferring dockerfile: 288B                                                                               0.0s
+ - Service policy-guard  Building                                                                                 46.6s
+ => [policy-guard internal] load build definition from Dockerfile                                                  0.4s
+ => => transferring dockerfile: 288B                                                                               0.0s
+ => [manifest internal] load metadata for docker.io/library/node:20-alpine                                         3.3s
+ => [policy-guard internal] load .dockerignore                                                                     0.4s
+ - Service nl-dsl        Building                                                                                 46.6s
+ => => transferring context: 2B                                                                                    0.0s
+ => [nl-dsl internal] load .dockerignore                                                                           0.4s
+ => => transferring context: 2B                                                                                    0.0s
+ => [planner internal] load .dockerignore                                                                          0.5s
+ => => transferring context: 2B                                                                                    0.0s
+ => [manifest internal] load .dockerignore                                                                         0.4s
+ => => transferring context: 2B                                                                                    0.0s
+ => [policy-guard internal] load build context                                                                     0.4s
+ => => transferring context: 3.28kB                                                                                0.0s
+ => [policy-guard 1/7] FROM docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f  11.2s
+ => => resolve docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f4eb47d5e2a08e1  0.1s
+ => => sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9 449B / 449B                         0.5s
+ => => sha256:fd345d7e43c58474c833bee593321ab1097dd720bebd8032e75fbf5b81b1e554 1.26MB / 1.26MB                     0.9s
+ => => sha256:c88300f8759af46375ccc157a0a0dbf7cdaeded52394b5ce2ce074e3b773fe82 42.75MB / 42.75MB                   7.7s
+ => => extracting sha256:c88300f8759af46375ccc157a0a0dbf7cdaeded52394b5ce2ce074e3b773fe82                          2.2s
+ => => extracting sha256:fd345d7e43c58474c833bee593321ab1097dd720bebd8032e75fbf5b81b1e554                          0.1s
+ => => extracting sha256:0de821d16564893ff12fae9499550711d92157ed1e6705a8c7f7e63eac0a2bb9                          0.1s
+ => [manifest internal] load build context                                                                         0.6s
+ => => transferring context: 3.68kB                                                                                0.0s
+ => [nl-dsl internal] load build context                                                                           0.7s
+ => => transferring context: 4.21kB                                                                                0.0s
+ => [planner internal] load build context                                                                          0.7s
+ => => transferring context: 3.28kB                                                                                0.0s
+ => [nl-dsl 2/7] WORKDIR /app                                                                                      1.4s
+ => [planner 3/7] COPY package.json package-lock.json* ./                                                          0.5s
+ => [manifest 3/7] COPY package.json package-lock.json* ./                                                         0.6s
+ => [policy-guard 3/7] COPY package.json package-lock.json* ./                                                     0.6s
+ => [nl-dsl 3/7] COPY package.json package-lock.json* ./                                                           0.6s
+ => [planner 4/7] RUN npm install || (echo "no lockfile, installing deps" && npm install)                         15.8s
+ => [manifest 4/7] RUN npm install || (echo "no lockfile, installing deps" && npm install)                        15.7s
+ => [nl-dsl 4/7] RUN npm install || (echo "no lockfile, installing deps" && npm install)                          15.7s
+ => [policy-guard 4/7] RUN npm install || (echo "no lockfile, installing deps" && npm install)                    15.7s
+ => [manifest 5/7] COPY tsconfig.json ./                                                                           0.9s
+ => [planner 5/7] COPY tsconfig.json ./                                                                            0.9s
+ => [nl-dsl 5/7] COPY tsconfig.json ./                                                                             0.9s
+ => [policy-guard 5/7] COPY tsconfig.json ./                                                                       0.9s
+ => [manifest 6/7] COPY src ./src                                                                                  0.7s
+ => [planner 6/7] COPY src ./src                                                                                   0.7s
+ => [nl-dsl 6/7] COPY src ./src                                                                                    0.6s
+ => [policy-guard 6/7] COPY src ./src                                                                              0.7s
+ => ERROR [manifest 7/7] RUN npx tsc -p .                                                                          9.8s
+ => CANCELED [planner 7/7] RUN npx tsc -p .                                                                       10.3s
+ => CANCELED [nl-dsl 7/7] RUN npx tsc -p .                                                                        10.4s
+ => CANCELED [policy-guard 7/7] RUN npx tsc -p .                                                                  10.5s
+------
+ > [manifest 7/7] RUN npx tsc -p .:
+9.611 src/auth.ts(1,49): error TS7016: Could not find a declaration file for module 'express'. '/app/node_modules/express/index.js' implicitly has an 'any' type.
+9.611   Try `npm i --save-dev @types/express` if it exists or add a new declaration (.d.ts) file containing `declare module 'express';`
+9.612 src/index.ts(1,21): error TS7016: Could not find a declaration file for module 'express'. '/app/node_modules/express/index.js' implicitly has an 'any' type.
+9.612   Try `npm i --save-dev @types/express` if it exists or add a new declaration (.d.ts) file containing `declare module 'express';`
+9.612 src/index.ts(2,18): error TS7016: Could not find a declaration file for module 'cors'. '/app/node_modules/cors/lib/index.js' implicitly has an 'any' type.
+9.612   Try `npm i --save-dev @types/cors` if it exists or add a new declaration (.d.ts) file containing `declare module 'cors';`
+[+] Running 0/4.ts(12,21): error TS7006: Parameter 'req' implicitly has an 'any' type.
+ - Service manifest      Building                                                                                 46.6s
+ - Service planner       Building                                                                                 46.6s
+ - Service policy-guard  Building                                                                                 46.6s
+ - Service nl-dsl        Building                                                                                 46.6s
+failed to solve: process "/bin/sh -c npx tsc -p ." did not complete successfully: exit code: 2
