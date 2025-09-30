@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/dsl.schema.json",
+  "type": "object",
+  "required": ["agent","workflow"],
+  "properties": {
+    "agent": {
+      "type": "object",
+      "required": ["name","objectives"],
+      "properties": {
+        "name": {"type":"string"},
+        "objectives": {"type":"array","items":{"type":"string"}},
+        "constraints": {"type":"array","items":{"type":"string"}}
+      }
+    },
+    "workflow": {
+      "type": "array",
+      "items": {
+        "type":"object",
+        "required":["step","action"],
+        "properties": {
+          "step":{"type":"string"},
+          "action":{"type":"string"},
+          "guard":{"type":"array","items":{"type":"string"}},
+          "hitl":{"type":"boolean"}
+        }
+      }
+    }
+  }
+}

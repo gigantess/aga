@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/manifest.schema.json",
+  "type": "object",
+  "required": ["id","version","tenant","scopes","workflow"],
+  "properties": {
+    "id":{"type":"string"},
+    "version":{"type":"integer"},
+    "tenant":{"type":"string"},
+    "scopes":{"type":"array","items":{"type":"string"}},
+    "region":{"type":"string"},
+    "cost_limit_usd_month":{"type":"number","minimum":0},
+    "workflow": {"type":"object"}
+  }
+}

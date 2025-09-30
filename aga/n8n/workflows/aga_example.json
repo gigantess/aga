@@ -1,0 +1,203 @@
+{
+  "name": "AGA Example",
+  "nodes": [
+    {
+      "id": 1,
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "parameters": {
+        "path": "aga/start",
+        "methods": [
+          "POST"
+        ]
+      },
+      "position": [
+        200,
+        200
+      ]
+    },
+    {
+      "id": 2,
+      "name": "NL→DSL",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "parameters": {
+        "url": "http://gateway/api/nl-dsl/parse",
+        "jsonParameters": true,
+        "sendBody": true,
+        "options": {
+          "headers": {
+            "X-Tenant": "={{$json[\"headers\"][\"x-tenant\"]}}"
+          }
+        },
+        "bodyParametersJson": "={\n  \"prompt\": $json.body.prompt,\n  \"constraints\": $json.body.constraints || []\n}"
+      },
+      "position": [
+        560,
+        200
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Planner",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "parameters": {
+        "url": "http://gateway/api/planner/plan",
+        "jsonParameters": true,
+        "sendBody": true,
+        "options": {
+          "headers": {
+            "X-Tenant": "={{$json[\"headers\"][\"x-tenant\"]}}"
+          }
+        },
+        "bodyParametersJson": "={\n  \"dsl\": $json[\"data\"]?.dsl || $json.dsl\n}"
+      },
+      "position": [
+        920,
+        200
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Policy Guard",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "parameters": {
+        "url": "http://gateway/api/policy/preflight",
+        "jsonParameters": true,
+        "sendBody": true,
+        "options": {
+          "headers": {
+            "X-Tenant": "={{$json[\"headers\"][\"x-tenant\"]}}"
+          }
+        },
+        "bodyParametersJson": "={\n  \"dsl\": $json.dsl || $json[\"data\"]?.dsl,\n  \"plan\": $json.plan || $json[\"data\"]?.plan\n}"
+      },
+      "position": [
+        1280,
+        200
+      ]
+    },
+    {
+      "id": 5,
+      "name": "HITL?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.data.pass}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "position": [
+        1600,
+        200
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Manifest",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "parameters": {
+        "url": "http://gateway/api/manifest/build",
+        "jsonParameters": true,
+        "sendBody": true,
+        "options": {
+          "headers": {
+            "X-Tenant": "={{$json[\"headers\"][\"x-tenant\"]}}"
+          }
+        },
+        "bodyParametersJson": "={\n  \"dsl\": $json.dsl || $json[\"prev\"]?.dsl,\n  \"plan\": $json.plan || $json[\"prev\"]?.plan\n}"
+      },
+      "position": [
+        1880,
+        120
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Manual Approval",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "parameters": {
+        "continueOnWebhook": true,
+        "resumeWebhookUrl": "aga/approve"
+      },
+      "position": [
+        1880,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "NL→DSL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NL→DSL": {
+      "main": [
+        [
+          {
+            "node": "Planner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Planner": {
+      "main": [
+        [
+          {
+            "node": "Policy Guard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Policy Guard": {
+      "main": [
+        [
+          {
+            "node": "HITL?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HITL?": {
+      "main": [
+        [
+          {
+            "node": "Manifest",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Manual Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
