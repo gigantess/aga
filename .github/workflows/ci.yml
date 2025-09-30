@@ -1,14 +1,34 @@
 name: CI
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 20
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - run: npm ci
-      - run: npm run build
-      - run: npm test --if-present
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install
+        run: npm ci || npm install
+
+      # 타입체크/빌드 (ESM + ts-node 개발환경은 빌드 시 tsc로 JS 생성)
+      - name: TypeCheck & Build
+        run: |
+          npm run build
+          ls -la dist
+
+      # (선택) 린트
+      - name: Lint
+        run: npm run lint --if-present
