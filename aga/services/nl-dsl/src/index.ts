@@ -1,54 +1,33 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import { z } from 'zod';
-import { log } from './logger.js';
-import { tenantMiddleware } from './auth.js';
-import type { DSL } from './types.js';
-import { maskPII } from './pii.js';
 
 const app = express();
+
+// 기본 미들웨어
 app.use(cors());
 app.use(express.json());
-app.use(tenantMiddleware);
 
-const Input = z.object({
-  prompt: z.string().min(5),
-  constraints: z.array(z.string()).optional(),
+// 헬스체크
+app.get('/health', (_req: Request, res: Response) => {
+  res.status(200).json({ ok: true, service: 'nl-dsl' });
 });
 
-app.post('/parse', async (req, res) => {
-  const parsed = Input.safeParse(req.body);
-  if (!parsed.success) return res.status(400).json(parsed.error.format());
+// (예시) 실제 라우트가 있다면 타입을 명시하여 추가하세요.
+// app.post('/v1/parse', (req: Request, res: Response) => {
+//   const payload = req.body as { text: string };
+//   res.json({ tokens: payload.text.split(/\s+/) });
+// });
 
-  const { prompt, constraints } = parsed.data;
-  const wantsCalendar = /면접|캘린더|일정/.test(prompt);
-  const wantsSheet = /시트|스프레드시트/.test(prompt);
-  const wantsEmail = /이메일|메일/.test(prompt);
-
-  const dsl: DSL = {
-    agent: {
-      name: 'generated_agent',
-      objectives: [maskPII(prompt)],
-      constraints,
-    },
-    tools: [
-      wantsEmail && 'gmail.read',
-      wantsSheet && 'sheets.write',
-      wantsCalendar && 'calendar.write',
-    ].filter(Boolean) as string[],
-    workflow: [
-      { step: 'ingest', action: wantsEmail ? 'gmail.fetch' : 'input.parse', guard: ['pii_scan'] },
-      { step: 'classify', action: 'llm.classify', guard: ['toxicity_check'] },
-      { step: 'score', action: 'rule.scorecard' },
-      { step: 'persist', action: wantsSheet ? 'sheets.write' : 'db.write', hitl: true },
-      wantsCalendar ? { step: 'schedule', action: 'calendar.create_event', hitl: true } : undefined,
-    ].filter(Boolean) as DSL['workflow'],
-    governance: { transparency: true, logging: ['prompt','tool_calls','outputs'], retention_days: 30 },
-  };
-
-  log('DSL generated for tenant', (req as any).tenant.id);
-  res.json({ dsl });
+// 에러 핸들러 (타입 안전)
+app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  const message = err instanceof Error ? err.message : 'Unknown error';
+  res.status(500).json({ error: message });
 });
 
-const port = Number(process.env.PORT || 3001);
-app.listen(port, () => log(`nl-dsl listening on ${port}`));
+// 기동
+const PORT = Number(process.env.PORT ?? 3001);
+app.listen(PORT, () => {
+  console.log(`[nl-dsl] listening on :${PORT}`);
+});
+
+export default app;

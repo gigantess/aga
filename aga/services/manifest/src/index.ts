@@ -1,50 +1,33 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import { log } from './logger.js';
-import { tenantMiddleware } from './auth.js';
-import type { Plan, DSL } from './types.js';
 
 const app = express();
+
+// 기본 미들웨어
 app.use(cors());
 app.use(express.json());
-app.use(tenantMiddleware);
 
-app.post('/build', (req, res) => {
-  const { dsl, plan } = req.body as { dsl: DSL, plan: Plan };
-  if (!dsl || !plan) return res.status(400).json({ error: 'Missing dsl or plan' });
-
-  const workflow = {
-    name: dsl.agent.name,
-    nodes: plan.nodes.map((n, idx) => ({
-      id: idx + 1,
-      name: n.id,
-      type: `custom:${n.type}`,
-      parameters: n.config || {},
-      position: [200 + idx*240, 200],
-    })),
-    connections: plan.edges.reduce((acc:any, e) => {
-      (acc[e.from] ||= []).push({ node: e.to, type: 'main', index: 0 });
-      return acc;
-    }, {} as Record<string, any[]>),
-    meta: {
-      requiredScopes: plan.requiredScopes,
-      governance: dsl.governance,
-    }
-  };
-
-  const manifest = {
-    id: `aga-${Date.now()}`,
-    version: 1,
-    tenant: (req as any).tenant.id,
-    scopes: plan.requiredScopes,
-    region: 'ap-northeast-2',
-    cost_limit_usd_month: 100,
-    workflow,
-  };
-
-  log('Manifest built', manifest.id);
-  res.json({ manifest });
+// 헬스체크
+app.get('/health', (_req: Request, res: Response) => {
+  res.status(200).json({ ok: true, service: 'manifest' });
 });
 
-const port = Number(process.env.PORT || 3004);
-app.listen(port, () => log(`manifest listening on ${port}`));
+// (예시) 실제 라우트가 있다면 타입을 명시하여 추가하세요.
+// app.post('/v1/something', (req: Request, res: Response) => {
+//   const payload = req.body as { name: string };
+//   res.json({ received: payload.name });
+// });
+
+// 에러 핸들러 (타입 안전)
+app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  const message = err instanceof Error ? err.message : 'Unknown error';
+  res.status(500).json({ error: message });
+});
+
+// 기동
+const PORT = Number(process.env.PORT ?? 3000);
+app.listen(PORT, () => {
+  console.log(`[manifest] listening on :${PORT}`);
+});
+
+export default app;
